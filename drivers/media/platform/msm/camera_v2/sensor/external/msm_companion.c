@@ -1843,7 +1843,7 @@ static long msm_companion_subdev_ioctl(struct v4l2_subdev *sd,
 	struct companion_device *companion_dev = v4l2_get_subdevdata(sd);
 
 	mutex_lock(&companion_dev->comp_mutex);
-	CDBG("[syscamera][%s::%d]id %d\n", __FUNCTION__, __LINE__, companion_dev->pdev->id);
+	CDBG("[syscamera][%s::%d]id %d\n", __FUNCTION__, __LINE__, companion_dev->pdev ? companion_dev->pdev->id : -1);
 	switch (cmd) {
 	case VIDIOC_MSM_SENSOR_GET_SUBDEV_ID:
 		rc = msm_companion_get_subdev_id(companion_dev, arg);
