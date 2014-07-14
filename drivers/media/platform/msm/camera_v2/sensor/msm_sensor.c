@@ -17,7 +17,7 @@
 #include "msm_camera_io_util.h"
 #include "msm_camera_i2c_mux.h"
 
-//#define CONFIG_MSMB_CAMERA_DEBUG
+#define CONFIG_MSMB_CAMERA_DEBUG
 
 #undef CDBG
 #ifdef CONFIG_MSMB_CAMERA_DEBUG
@@ -449,6 +449,7 @@ int msm_sensor_config(struct msm_sensor_ctrl_t *s_ctrl, void __user *argp)
 		struct msm_camera_power_ctrl_t *p_ctrl;
 		uint16_t size;
 		int slave_index = 0;
+		pr_info("CFG_SET_SLAVE_INFO");
 		if (copy_from_user(&sensor_slave_info,
 				   (void*)cdata->cfg.setting,
 				   sizeof(sensor_slave_info))) {
@@ -516,6 +517,7 @@ int msm_sensor_config(struct msm_sensor_ctrl_t *s_ctrl, void __user *argp)
 		void *reg_setting = NULL;
 		uint8_t *reg_data = NULL;
 		uint32_t i = 0, size = 0;
+		pr_info("CFG_WRITE_I2C_ARRAY");
 
 		if (copy_from_user(&conf_array,
 				   (void*)cdata->cfg.setting,
@@ -662,6 +664,7 @@ int msm_sensor_config(struct msm_sensor_ctrl_t *s_ctrl, void __user *argp)
 	case CFG_WRITE_I2C_SEQ_ARRAY: {
 		struct msm_camera_i2c_seq_reg_setting conf_array;
 		struct msm_camera_i2c_seq_reg_array *reg_setting = NULL;
+		pr_info("CFG_WRITE_I2C_SEQ_ARRAY");
 
 		if (copy_from_user(&conf_array,
 				   (void*)cdata->cfg.setting,
@@ -726,6 +729,7 @@ int msm_sensor_config(struct msm_sensor_ctrl_t *s_ctrl, void __user *argp)
 		struct msm_camera_i2c_reg_setting *stop_setting =
 			&s_ctrl->stop_setting;
 		struct msm_camera_i2c_reg_array *reg_setting = NULL;
+		pr_info("CFG_SET_STOP_STREAM_SETTING");
 		if (copy_from_user(stop_setting,
 				   (void*)cdata->cfg.setting,
 				   sizeof(struct msm_camera_i2c_reg_setting))) {
@@ -758,6 +762,7 @@ int msm_sensor_config(struct msm_sensor_ctrl_t *s_ctrl, void __user *argp)
 	case CFG_SET_GPIO_STATE: {
 		struct msm_sensor_gpio_config gpio_config;
 		struct msm_camera_power_ctrl_t *data = &s_ctrl->sensordata->power_info;
+		pr_info("CFG_SET_GPIO_STATE");
 		if (copy_from_user(&gpio_config,
 				   (void*)cdata->cfg.setting,
 				   sizeof(gpio_config))) {
